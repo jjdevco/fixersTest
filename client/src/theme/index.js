@@ -45,19 +45,19 @@ export default {
       darken: "#3D6CD0",
     },
     secondary: {
-      main: "#6226EF",
-      lighten: "#DFD3FC",
-      darken: "#5321CB",
-    },
-    success: {
-      main: "#03B69C",
-      lighten: "#CCF0EB",
-      darken: "#079782",
-    },
-    info: {
       main: "#BA29FF",
       lighten: "#F1D4FF",
       darken: "#9520CC",
+    },
+    success: {
+      main: "#03B69C",
+      lighten: "#ccf0eb",
+      darken: "#027f6d",
+    },
+    info: {
+      main: "#6226EF",
+      lighten: "#DFD3FC",
+      darken: "#5321CB",
     },
     warning: {
       main: "#FFA756",
@@ -65,14 +65,19 @@ export default {
       darken: "#E1954F",
     },
     danger: {
-      main: "#EF3826",
-      lighten: "#FCD7D3",
-      darken: "#EA0234",
+      main: "#f25f51",
+      lighten: "#fbd7d3",
+      darken: "#bf2c1e",
     },
     background: {
       main: "#F5F6FA",
       lighten: "#FFFFFF",
       darken: "#D5D5D5",
+    },
+    text: {
+      main: "#606060",
+      lighten: "#A6A6A6",
+      darken: "#202224",
     },
   },
   spacing,
