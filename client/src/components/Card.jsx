@@ -18,6 +18,7 @@ function Card({
   borderRadius,
   children,
   elevation,
+  className,
 }) {
   return (
     <Container
@@ -35,6 +36,7 @@ function Card({
       border={border}
       borderRadius={borderRadius}
       elevation={elevation}
+      className={className}
     >
       {children}
     </Container>
@@ -88,7 +90,8 @@ Card.propTypes = {
   border: PropTypes.string,
   borderRadius: PropTypes.number,
   elevation: PropTypes.number,
-  background: PropTypes.oneOfType(["main", "lighten", "darken"]),
+  background: PropTypes.oneOf(["main", "lighten", "darken"]),
+  className: PropTypes.string,
 };
 
 export default Card;
