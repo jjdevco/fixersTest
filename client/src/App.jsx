@@ -6,28 +6,49 @@ import theme from "./theme";
 
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Notifier from "./components/Notifier";
 
 import { Provider as AuthProvider } from "./state/auth";
 import WithAuthentication from "./middlewares/withAuthentication";
 
+import { SnackbarProvider } from "notistack";
+import { Provider as NotificationsProvider } from "./state/notifications";
+
 function App() {
   return (
     <Router>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <AuthProvider>
-          <Root>
-            <Switch>
-              <Route path="/login" component={WithAuthentication(Login)} />
-              <Route
-                path="/dashboard"
-                component={WithAuthentication(Dashboard)}
-              />
-              <Route path="*" component={WithAuthentication(Dashboard)} />
-            </Switch>
-          </Root>
-        </AuthProvider>
-      </ThemeProvider>
+      <NotificationsProvider>
+        <ThemeProvider theme={theme}>
+          <SnackbarProvider
+            preventDuplicate
+            classes={{
+              variantSuccess: theme.colors.success.main,
+              variantError: theme.colors.danger.main,
+              variantWarning: theme.colors.warning.main,
+              variantInfo: theme.colors.info.main,
+            }}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            <GlobalStyle />
+            <Notifier />
+            <AuthProvider>
+              <Root>
+                <Switch>
+                  <Route path="/login" component={WithAuthentication(Login)} />
+                  <Route
+                    path="/dashboard"
+                    component={WithAuthentication(Dashboard)}
+                  />
+                  <Route path="*" component={WithAuthentication(Dashboard)} />
+                </Switch>
+              </Root>
+            </AuthProvider>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </NotificationsProvider>
     </Router>
   );
 }

@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "firebase": "^7.20.0",
     "framer-motion": "^2.6.6",
+    "notistack": "^1.0.0",
     "react": "^16.13.1",
     "react-context-devtool": "^2.0.0",
     "react-dom": "^16.13.1",
