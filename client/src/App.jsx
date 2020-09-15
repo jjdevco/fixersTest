@@ -6,6 +6,7 @@ import theme from "./theme";
 import Login from "./components/Login";
 
 import { Provider as AuthProvider } from "./state/auth";
+import WithAuthentication from "./middlewares/withAuthentication";
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         <AuthProvider>
           <Root>
             <Switch>
-              <Route path="/login" component={Login} />
-              <Route path="*" component={Login} />
+              <Route path="/login" component={WithAuthentication(Login)} />
+              <Route path="*" component={WithAuthentication(Login)} />
             </Switch>
           </Root>
         </AuthProvider>

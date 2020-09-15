@@ -2,10 +2,21 @@ import React, { createContext, useContext, useReducer } from "react";
 
 import { LOGIN_USER, SIGNOUT_USER } from "./types";
 
-export const Context = createContext({
-  currentUser: null,
-  isAuth: false,
-});
+export const Context = (() => {
+  let currentUser = null;
+  let isAuth = false;
+
+  const token = localStorage.getItem("token");
+  if (token) {
+    currentUser = token;
+    isAuth = true;
+  }
+
+  return createContext({
+    currentUser,
+    isAuth,
+  });
+})();
 
 export const Reducer = (state, { type, payload }) => {
   switch (type) {
