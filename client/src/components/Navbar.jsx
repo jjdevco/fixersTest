@@ -20,7 +20,7 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const { push } = useHistory();
 
-  const handleSignOut = async () => {
+  const handleSignOut = async (evt) => {
     if (window.confirm("Are you sure you want to log out?")) {
       try {
         push("/");
@@ -53,15 +53,17 @@ function Navbar() {
           <i className="fas fa-arrow-down" />
         </Arrow>
         <Menu open={open}>
-          <Button
-            width="100%"
-            variant="outlined"
-            color="danger"
-            icon="fa-sign-out-alt"
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </Button>
+          {open && (
+            <Button
+              width="100%"
+              variant="outlined"
+              color="danger"
+              icon="fa-sign-out-alt"
+              onClick={() => handleSignOut()}
+            >
+              Sign Out
+            </Button>
+          )}
         </Menu>
       </User>
     </Container>
