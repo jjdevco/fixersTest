@@ -3,16 +3,26 @@ const spacing = (first, second, third, fourth) => {
     .length;
   switch (sides) {
     case 4: {
-      return `${first}px ${second}px ${third}px ${fourth}px`;
+      return `${first === "auto" ? "auto" : first + "px"} ${
+        second === "auto" ? "auto" : second + "px"
+      } ${third === "auto" ? "auto" : third + "px"} ${
+        fourth === "auto" ? "auto" : fourth + "px"
+      }`;
     }
     case 3: {
-      return `${first}px ${second}px ${third}px ${second}px`;
+      return `${first === "auto" ? "auto" : first + "px"} ${
+        second === "auto" ? "auto" : second + "px"
+      } ${third === "auto" ? "auto" : third + "px"} ${
+        second === "auto" ? "auto" : second + "px"
+      }`;
     }
     case 2: {
-      return `${first}px ${second}px ${first}px ${second}px`;
+      return `${first === "auto" ? "auto" : first + "px"} ${
+        second === "auto" ? "auto" : second + "px"
+      }`;
     }
     case 1: {
-      return `${first}px ${first}px ${first}px ${first}px`;
+      return `${first === "auto" ? "auto" : first + "px"}`;
     }
     default: {
       break;
