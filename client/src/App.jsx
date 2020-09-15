@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
+
 import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 
 import { Provider as AuthProvider } from "./state/auth";
 import WithAuthentication from "./middlewares/withAuthentication";
@@ -17,7 +19,11 @@ function App() {
           <Root>
             <Switch>
               <Route path="/login" component={WithAuthentication(Login)} />
-              <Route path="*" component={WithAuthentication(Login)} />
+              <Route
+                path="/dashboard"
+                component={WithAuthentication(Dashboard)}
+              />
+              <Route path="*" component={WithAuthentication(Dashboard)} />
             </Switch>
           </Root>
         </AuthProvider>
