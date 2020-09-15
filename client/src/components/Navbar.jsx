@@ -10,12 +10,19 @@ import styled from "styled-components";
 
 import Button from "./Button";
 
-import { Context } from "../state/auth";
+import { Context as AuthContext } from "../state/auth";
+import {
+  Context as NotificationsContext,
+  enqueueSnackbar,
+  closeSnackbar,
+} from "../state/notifications";
 import { SIGNOUT_USER } from "../state/types";
 import { auth } from "../providers/firebase";
 
 function Navbar() {
-  const { dispatch } = useContext(Context);
+  const authContext = useContext(AuthContext);
+  const notificationsContext = useContext(NotificationsContext);
+
   const wrapperRef = useRef(null);
   const [open, setOpen] = useState(false);
   const { push } = useHistory();
@@ -23,11 +30,31 @@ function Navbar() {
   const handleSignOut = async (evt) => {
     if (window.confirm("Are you sure you want to log out?")) {
       try {
-        push("/");
+        const key = `logout_${new Date().getTime()}`;
+        notificationsContext.dispatch(
+          enqueueSnackbar({
+            message: `Log Out successfully!`,
+            options: {
+              variant: "success",
+              key,
+            },
+          })
+        );
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         await auth().signOut();
-        await dispatch({ type: SIGNOUT_USER });
+        await authContext.dispatch({ type: SIGNOUT_USER });
         if (localStorage.getItem("token")) localStorage.removeItem("token");
+        push("/");
+        notificationsContext.dispatch(closeSnackbar(key));
       } catch (error) {
+        notificationsContext.dispatch(
+          enqueueSnackbar({
+            message: error.message,
+            options: {
+              variant: "error",
+            },
+          })
+        );
         console.log(error);
       }
     }

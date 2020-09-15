@@ -5,12 +5,19 @@ import Card from "./Card";
 import Input from "./Input";
 import Button from "./Button";
 
-import { auth } from "../providers/firebase";
-import { Context } from "../state/auth";
+import { Context as AuthContext } from "../state/auth";
+import {
+  Context as NotificationsContext,
+  enqueueSnackbar,
+  closeSnackbar,
+} from "../state/notifications";
 import { LOGIN_USER } from "../state/types";
 
+import { auth } from "../providers/firebase";
+
 function Login({ history }) {
-  const { dispatch } = useContext(Context);
+  const authContext = useContext(AuthContext);
+  const notificationsContext = useContext(NotificationsContext);
 
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(null);
@@ -52,19 +59,48 @@ function Login({ history }) {
       const { user } = await auth().signInWithEmailAndPassword(email, password);
       const token = user.xa;
 
+      const key = `logout_${new Date().getTime()}`;
+
+      notificationsContext.dispatch(
+        enqueueSnackbar({
+          message: `Log In successfully!`,
+          options: {
+            variant: "success",
+            key,
+          },
+        })
+      );
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       if (remember) localStorage.setItem("token", token);
 
-      await dispatch({ type: LOGIN_USER, payload: token });
-
+      await authContext.dispatch({ type: LOGIN_USER, payload: token });
       history.push("/dashboard");
+      notificationsContext.dispatch(closeSnackbar(key));
     } catch (error) {
-      if (error.code && error.code.startsWith("auth/")) {
-        if (error.code !== "auth/wrong-password") {
-          setEmailError(error.message);
-        } else {
-          setPasswordError(error.message);
-        }
-      } else console.log(error);
+      if (error.code && error.code === "auth/wrong-password") {
+        setPasswordError(error.message);
+      } else if (
+        error.code &&
+        [
+          "auth/invalid-email",
+          "auth/user-disabled",
+          "auth/user-not-found",
+        ].indexOf(error.code) !== -1
+      ) {
+        setEmailError(error.message);
+      } else {
+        notificationsContext.dispatch(
+          enqueueSnackbar({
+            message: error.message,
+            options: {
+              variant: "error",
+            },
+          })
+        );
+        console.log(error);
+      }
     }
 
     setLoading(false);
