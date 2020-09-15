@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
 import Login from "./components/Login";
 
@@ -9,6 +9,7 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <Root>
           <Switch>
             <Route path="/login" component={Login} />
@@ -19,6 +20,13 @@ function App() {
     </Router>
   );
 }
+
+const GlobalStyle = createGlobalStyle`
+  html, body {
+    margin: 0;
+    font-family: "Nunito Sans", sans-serif; 
+  }
+`;
 
 const Root = styled.div`
   position: absolute;
