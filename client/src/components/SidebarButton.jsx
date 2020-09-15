@@ -6,7 +6,9 @@ import { useHistory, useLocation } from "react-router-dom";
 function SidebarButton({ icon, text, path }) {
   const { push } = useHistory();
   const { pathname } = useLocation();
-  const active = path === pathname;
+  const active =
+    (path === "/dashboard" && path === pathname) ||
+    (path !== "/dashboard" && pathname.startsWith(path));
 
   return (
     <Container active={active} onClick={() => push(path)}>

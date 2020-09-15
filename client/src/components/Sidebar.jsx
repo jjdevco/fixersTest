@@ -13,17 +13,17 @@ function Sidebar() {
     {
       icon: "fa-wrench",
       text: "Repairs",
-      path: "/repairs",
+      path: "/dashboard/repairs",
     },
     {
       icon: "fa-car",
       text: "Cars",
-      path: "/cars",
+      path: "/dashboard/cars",
     },
     {
       icon: "fa-address-card",
       text: "Clients",
-      path: "/clients",
+      path: "/dashboard/clients",
     },
   ];
   return (
