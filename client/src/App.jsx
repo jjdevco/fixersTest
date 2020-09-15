@@ -5,17 +5,21 @@ import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
 import Login from "./components/Login";
 
+import { Provider as AuthProvider } from "./state/auth";
+
 function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Root>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="*" component={Login} />
-          </Switch>
-        </Root>
+        <AuthProvider>
+          <Root>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="*" component={Login} />
+            </Switch>
+          </Root>
+        </AuthProvider>
       </ThemeProvider>
     </Router>
   );

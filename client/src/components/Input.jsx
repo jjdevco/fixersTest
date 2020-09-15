@@ -68,12 +68,15 @@ const InputContainer = styled.div`
   flex-direction: row;
   align-items: center;
   text-align: center;
+  width: 100%;
 `;
 
 const InputField = styled.input`
   appearance: none;
   outline: none;
+  width: inherit;
   min-height: 32px;
+  min-width: 0;
   padding: 0 ${(props) => (props.rightIcon ? "34px" : "10px")} 0
     ${(props) => (props.leftIcon ? "34px" : "10px")};
   color: ${(props) => {

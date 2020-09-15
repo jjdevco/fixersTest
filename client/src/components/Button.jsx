@@ -10,6 +10,7 @@ function Button({
   color,
   icon,
   iconPosition,
+  disabled,
   onClick,
   children,
   className,
@@ -22,6 +23,7 @@ function Button({
       variant={variant}
       color={color}
       iconPosition={iconPosition}
+      disabled={disabled}
       onClick={onClick}
       className={className}
     >
@@ -86,8 +88,13 @@ const Container = styled.button`
         : props.color === "default"
         ? props.theme.colors.text.main
         : props.theme.colors.background.lighten};
-
     filter: brightness(75%);
+  }
+  &:disabled {
+    filter: brightness(80%);
+    background: ${(props) => props.theme.colors.background.main};
+    color: ${(props) => props.theme.colors.text.lighten};
+    cursor: default;
   }
   transition: all 125ms ease-in-out;
 `;
@@ -127,6 +134,7 @@ Button.propTypes = {
   ]),
   icon: PropTypes.string,
   iconPosition: PropTypes.oneOf(["left", "right"]),
+  disabled: PropTypes.bool,
   onClick: PropTypes.func,
   className: PropTypes.string,
 };

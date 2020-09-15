@@ -1,5 +1,6 @@
 const spacing = (first, second, third, fourth) => {
-  const sides = [first, second, third, fourth].filter((s) => !!s).length;
+  const sides = [first, second, third, fourth].filter((s) => s !== undefined)
+    .length;
   switch (sides) {
     case 4: {
       return `${first}px ${second}px ${third}px ${fourth}px`;
