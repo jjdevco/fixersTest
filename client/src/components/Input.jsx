@@ -15,6 +15,7 @@ function Input({
   rightIcon,
   rightIconAction,
   className,
+  readOnly,
 }) {
   return (
     <Container className={className}>
@@ -39,6 +40,7 @@ function Input({
           value={value}
           leftIcon={leftIcon}
           rightIcon={rightIcon}
+          readOnly={readOnly}
         />
         {rightIcon && (
           <RightIcon
@@ -180,6 +182,7 @@ Input.propTypes = {
   leftIcon: PropTypes.string,
   rightIcon: PropTypes.string,
   rightIconAction: PropTypes.func,
+  readOnly: PropTypes.bool,
 };
 
 export default Input;

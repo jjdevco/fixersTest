@@ -91,15 +91,20 @@ function Login({ history }) {
       ) {
         setEmailError(error.message);
       } else {
+        let message;
+        if (error.response && error.response.data.message)
+          message = error.response.data.message;
+        else message = error.message;
+
         notificationsContext.dispatch(
           enqueueSnackbar({
-            message: error.message,
+            message: message,
             options: {
               variant: "error",
             },
           })
         );
-        console.log(error);
+        console.error(error);
       }
     }
 

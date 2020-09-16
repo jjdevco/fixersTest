@@ -2,7 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-function ImageUploader({ height, width, src, text, setFile, setError, error }) {
+function ImageUploader({
+  height,
+  width,
+  src,
+  text,
+  setFile,
+  setError,
+  error,
+  className,
+}) {
   const inputRef = useRef(null);
   const [name, setName] = useState(text);
   const [innerSrc, setInnerSrc] = useState(null);
@@ -43,7 +52,13 @@ function ImageUploader({ height, width, src, text, setFile, setError, error }) {
 
   return (
     <Container>
-      <Media height={height} width={width} imageUrl={imageUrl} error={error}>
+      <Media
+        className={className}
+        height={height}
+        width={width}
+        imageUrl={imageUrl}
+        error={error}
+      >
         {imageUrl && !error ? (
           <Picture src={imageUrl} alt="client-picture" />
         ) : (

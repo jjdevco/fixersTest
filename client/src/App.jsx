@@ -6,6 +6,13 @@ import theme from "./theme";
 
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Clients from "./components/Clients";
+import NewClient from "./components/NewClient";
+import ShowClient from "./components/ShowClient";
+import EditClient from "./components/EditClient";
+import Cars from "./components/Cars";
+import ShowCar from "./components/ShowCar";
+import NewCar from "./components/NewCar";
 import Notifier from "./components/Notifier";
 
 import { Provider as AuthProvider } from "./state/auth";
@@ -39,8 +46,44 @@ function App() {
                 <Switch>
                   <Route path="/login" component={WithAuthentication(Login)} />
                   <Route
+                    exact
                     path="/dashboard"
                     component={WithAuthentication(Dashboard)}
+                  />
+                  <Route
+                    exact
+                    path="/dashboard/clients"
+                    component={WithAuthentication(Clients)}
+                  />
+                  <Route
+                    exact
+                    path={"/dashboard/clients/new"}
+                    component={WithAuthentication(NewClient)}
+                  />
+                  <Route
+                    exact
+                    path={"/dashboard/clients/show/:id"}
+                    component={WithAuthentication(ShowClient)}
+                  />
+                  <Route
+                    exact
+                    path={"/dashboard/clients/edit/:id"}
+                    component={WithAuthentication(EditClient)}
+                  />
+                  <Route
+                    exact
+                    path="/dashboard/cars"
+                    component={WithAuthentication(Cars)}
+                  />
+                  <Route
+                    exact
+                    path={"/dashboard/cars/new"}
+                    component={WithAuthentication(NewCar)}
+                  />
+                  <Route
+                    exact
+                    path={"/dashboard/cars/show/:id"}
+                    component={WithAuthentication(ShowCar)}
                   />
                   <Route path="*" component={WithAuthentication(Dashboard)} />
                 </Switch>
