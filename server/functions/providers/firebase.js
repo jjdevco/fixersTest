@@ -16,6 +16,7 @@ const SERVER_CONFIG = {
 admin.initializeApp({
   credential: admin.credential.cert(SERVER_CONFIG),
   databaseURL: process.env.DATABASE_URL,
+  storageBucket: process.env.STORAGE_BUCKET,
 });
 
 const db = admin.firestore();

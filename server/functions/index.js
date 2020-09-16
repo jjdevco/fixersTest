@@ -4,12 +4,12 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const uploadHandler = require("./middlewares/uploadHandler");
 const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
 
 const clientsRoutes = require("./routes/clients");
+const carsRoutes = require("./routes/cars");
 
 // Middlewares Initialization
 app.use(
@@ -22,10 +22,10 @@ app.use(
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(uploadHandler);
 
 // Inject Routes
 app.use(clientsRoutes);
+app.use(carsRoutes);
 
 // Error Handler Middleware
 app.use(errorHandler);
